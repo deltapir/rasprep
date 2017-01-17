@@ -10,5 +10,8 @@ OK Aggiungere una riga che si sovrascrive quando il programma calcola il
 	del pianeta/satellite/stella
 -  Aggiungere la possibilità di chiedere la posizione di più pianeti.
 -  Tradurre il programma in inglese
--  Aggiornare il file Readmetimelapse.md per la visualizzazione su github.com 
+-  Aggiornare il file readmetimelapse.md per la visualizzazione su github.com 
 -  Incorporare il file futuretimelapse.txt in readmetimelapse.md
+-  Universalizzare timelapse.py per renderlo funzionante per qualsiasi oggetto
+	epheem.body. da importare da conftimelapse.txt
+
