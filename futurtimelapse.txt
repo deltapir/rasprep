@@ -1,0 +1,13 @@
+Futuri implementi in Timelapse.py
+
+OK Aggiungere la letture da un file timeconf delle latitudini dell'observer
+	per questioni di privacy;
+OK Aggiungere una riga che si sovrascrive quando il programma calcola il 
+	tempo 'lapse' per la moon2;
+-  Sistemare in generale l'output del programma;
+-  Sistemare l'ora automatica del Raspberry.
+-  Aggiungere un semplice body-follower che indica continuamente la posizione
+	del pianeta/satellite/stella
+-  Aggiungere la possibilità di chiedere la posizione di più pianeti.
+-  Tradurre il programma in inglese
+-  Aggiornare il file Readmetimelapse.md per la visualizzazione su github.com 
