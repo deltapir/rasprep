@@ -11,3 +11,4 @@ OK Aggiungere una riga che si sovrascrive quando il programma calcola il
 -  Aggiungere la possibilità di chiedere la posizione di più pianeti.
 -  Tradurre il programma in inglese
 -  Aggiornare il file Readmetimelapse.md per la visualizzazione su github.com 
+-  Incorporare il file futuretimelapse.txt in readmetimelapse.md
