@@ -12,6 +12,11 @@ OK Aggiungere una riga che si sovrascrive quando il programma calcola il
 -  Tradurre il programma in inglese
 -  Aggiornare il file readmetimelapse.md per la visualizzazione su github.com 
 -  Incorporare il file futuretimelapse.txt in readmetimelapse.md
--  Universalizzare timelapse.py per renderlo funzionante per qualsiasi oggetto
+-  Universalizzare timelapse.py per renderlo funzionante con qualsiasi oggetto
 	epheem.body. da importare da conftimelapse.txt
+-  Supporto Telegram-Bot
+-  Aggiunta di personalizzazioni del programma da chiedere al primo avvio:
+ -  Nome utente;
+ -  Coordinate dell'observer;
+ -  epheem.body da seguire;
 
