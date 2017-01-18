@@ -1,4 +1,4 @@
-#Futuri implementi in **timelapse.py**
+#Futuri implementi in timelapse.py
 
 -[x]  Aggiungere la letture da un file 'timeconf' delle latitudini dell'observer;
 -[x]  Aggiungere una riga che si sovrascrive quando il programma calcola il 
