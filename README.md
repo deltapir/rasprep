@@ -1,8 +1,10 @@
 #timelapse.py
 
-Per usare **timelapse.py** basta fare un file `conftimelapse` nella stessa cartella dell'applicazione e scriverci *latitudine* e *longitudine* 
-dell'`observer` (cioè da dove si vuole osservare la Luna (per ora) dalla Terra).
+Per usare **timelapse.py** basta fare un file `conftimelapse.txt` nella stessa cartella dell'applicazione e scriverci *latitudine* e *longitudine* 
+dell'`observer` (cioè da dove si vuole osservare la Luna (*per ora*) dalla Terra).
+
 `40.0000:20.00000:`
+
 Prima la *latitudine* e poi la *longitudine*!
 
 **Stat'v bbuon, waju!**
