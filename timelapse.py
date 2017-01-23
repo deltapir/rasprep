@@ -87,18 +87,6 @@ def DATA():
 
 def POS(body): return body.alt, body.az
 
-#def ConfigSectionMap(section):
-#    dict1 = {}
-#    options = Config.options(section)
-#    for option in options:
-#        try:
-#            dict1[option] = Config.get(section, option)
-#            if dict1[option] == -1:
-#                DebugPrint("skip: %s" % option)
-#        except:
-#            print("exception on %s!" % option)
-#            dict1[option] = None
-#    return dict1
 #####################################################	MAIN	#####################################################	#######################################
 #create a INI file for configparsers
 conftime = open("conftime.ini",'w')
@@ -126,11 +114,9 @@ if a.startswith('n'):
 raw_input ("Quando sei pronto, premi INVIO! \n")
 
 #read from conftime.ini
-#conftime = open("conftime.ini",'r')
 config.read('conftime.ini')
 lat=config.get('Observer','lats')
 lon=config.get('Observer','long')
-#conftime.close()
 
 #lapse=input("Tempo tra uno scatto e l'altro? ")
 #wait=input("Tra quanti secondi inizia il time-lapse? ")
