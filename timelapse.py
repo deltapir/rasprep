@@ -6,6 +6,8 @@ import sys
 import RPi.GPIO as GPIO
 import ephem
 import math
+import ConfigParser
+config=ConfigParser.RawConfigParser()
 
 GPIO.setmode(GPIO.BOARD) #conta i pin sulla board
 
@@ -85,8 +87,31 @@ def DATA():
 
 def POS(body): return body.alt, body.az
 
-
+#def ConfigSectionMap(section):
+#    dict1 = {}
+#    options = Config.options(section)
+#    for option in options:
+#        try:
+#            dict1[option] = Config.get(section, option)
+#            if dict1[option] == -1:
+#                DebugPrint("skip: %s" % option)
+#        except:
+#            print("exception on %s!" % option)
+#            dict1[option] = None
+#    return dict1
 #####################################################	MAIN	#####################################################	#######################################
+#create a INI file for configparsers
+conftime = open("conftime.ini",'w')
+config.add_section('User')
+name=raw_input("Inserisci il tuo nome: ")
+config.set('User','Name',name)
+config.add_section('Observer')
+lats=raw_input("Inserisci la latitudine dell'observer: ")
+config.set('Observer','lats',lats)
+long=raw_input("Inserisci la longitudine dell'observer: ")
+config.set('Observer','long',long)
+config.write(conftime)
+conftime.close()
 
 print (time.strftime("Oggi e il %d/%m/%Y e sono le %H:%M:%S")) 
 a = raw_input("Giusto? ") 
@@ -100,14 +125,12 @@ if a.startswith('n'):
         sys.exit() 
 raw_input ("Quando sei pronto, premi INVIO! \n")
 
-print("Leggo dal file")
-with open("conftimelapse.txt", "r") as tconf:
-	for line in tconf:
-		coor=line.split(":")
-		lat,lon=coor[0],coor[1]
-		lon=str(lon)
-		lat=str(lat)
-print("Lat: ",lat, "\nLong: ",lon)
+#read from conftime.ini
+#conftime = open("conftime.ini",'r')
+config.read('conftime.ini')
+lat=config.get('Observer','lats')
+lon=config.get('Observer','long')
+#conftime.close()
 
 #lapse=input("Tempo tra uno scatto e l'altro? ")
 #wait=input("Tra quanti secondi inizia il time-lapse? ")
@@ -125,10 +148,6 @@ moon=ephem.Moon()
 moon2=ephem.Moon()
 
 moonalt, moonaz, moon2alt, moon2az = COMPUTE (lon, lat, moon, moon2, reflex, reflexvirt)
-print('moonalt ', moonalt)
-print('moonaz ', moonaz)
-print('moon2alt ', moon2alt)
-print('moon2az ', moon2az)
 FIRST (moon2az)
 #sleep(wait)
 while 1<5:
