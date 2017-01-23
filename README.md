@@ -7,10 +7,10 @@ Per usare **timelapse.py** basta `sudo python timelapse.py`
 
 #Futuri implementi in timelapse.py
 
-- [x]  ~Aggiungere la letture da un file `conftimelapse.txt` delle latitudini dell'observer;~
+- [x]  ~~Aggiungere la letture da un file `conftimelapse.txt` delle latitudini dell'observer;~~
 - [x]  Aggiungere una riga che si sovrascrive quando il programma calcola il 
 	tempo `lapse` per la `moon2`;
-- [ ]  Non ricreare ogni volta il file conftime.ini ma usa le info già inserite;
+- [ ]  Non ricreare ogni volta il file `conftime.ini` ma usa le info già inserite;
 - [ ]  Sistemare in generale l'output del programma;
 - [ ]  Aggiungere un semplice `body-follower` che indica continuamente la posizione
 	del pianeta/satellite/stella;
