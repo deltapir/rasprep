@@ -8,7 +8,7 @@ import ephem
 import math
 import ConfigParser
 config=ConfigParser.RawConfigParser()
-#import os.path
+import os
 
 GPIO.setmode(GPIO.BOARD) #conta i pin sulla board
 
@@ -88,25 +88,33 @@ def DATA():
 
 def POS(body): return body.alt, body.az
 
+def CONFIG():
+	conftime=open('conftime.ini','w')
+	config.add_section('User')
+        name=raw_input("Inserisci il tuo nome: ")
+        config.set('User','Name',name)
+        config.add_section('Observer')
+        lats=raw_input("Inserisci la latitudine dell'observer: ")
+        config.set('Observer','lats',lats)
+        long=raw_input("Inserisci la longitudine dell'observer: ")
+        config.set('Observer','long',long)
+        config.write(conftime)
+        conftime.close()
 #####################################################	MAIN	#####################################################	#######################################
 #create a INI file for configparsers
-conftime = open("conftime.ini",'r+')
-config.readfp(conftime)
-if config.has_section('User')== True:
-	print("Benvenuto %s. La tua longitudine e latitudine sono: %s - %s" % (config.get('User','Name'), config.get('Observer','long'), config.get('Observer','lats')))
-	conftime.close()
+if os.path.isfile('./conftime.ini')==True:
+	conftime = open("conftime.ini",'r+')
+	config.readfp(conftime)
+	if config.has_section('User')== True:
+		print("Benvenuto %s. La tua longitudine e latitudine sono: %s - %s" % (config.get('User','Name'), config.get('Observer','long'), config.get('Observer','lats')))
+		conftime.close()
+	else:
+		conftime.close()
+		CONFIG()
 else:
-	config.add_section('User')
-	name=raw_input("Inserisci il tuo nome: ")
-	config.set('User','Name',name)
-	config.add_section('Observer')
-	lats=raw_input("Inserisci la latitudine dell'observer: ")
-	config.set('Observer','lats',lats)
-	long=raw_input("Inserisci la longitudine dell'observer: ")
-	config.set('Observer','long',long)
-	config.write(conftime)
-	conftime.close()
-	
+	print("Sei sccemo")
+	CONFIG()
+		
 print (time.strftime("Oggi e il %d/%m/%Y e sono le %H:%M:%S")) 
 a = raw_input("Giusto? ") 
 if a.startswith('n'):
