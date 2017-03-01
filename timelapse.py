@@ -148,7 +148,7 @@ moon=ephem.Moon()
 moon2=ephem.Moon()
 
 moonalt, moonaz, moon2alt, moon2az = COMPUTE (lon, lat, moon, moon2, reflex, reflexvirt)
-FIRST (moon2az)
+#FIRST (moon2az)
 #sleep(wait)
 while 1<5:
 	i=0
@@ -168,12 +168,13 @@ while 1<5:
 		#print('Stampo la data dentro il while ', reflexvirt.date)
 		moon2.compute(reflexvirt)				#computa la posizione di moon2 con la nuova ora
 		moon2az=str(moon2.az)		#restituisce l'azimut in angolo di moon2
-		print ('Tra ',i,' secondi la luna sta in ',moon2az,' ', end='\r')
+		moon2alt=str(moon2.alt)
+		print ('Tra ',i,' secondi la luna sta in AZ:',moon2az,'e ALT:',moon2alt,' ', end='\r')
 		#raw_input ("INVIO")
 		#moon2.compute(reflexvirt)
 		lapse = i			#aggiorno il time di lapse tra uno scatto e l'altro
 		i+=1
-	FRAZIO (8)
+	#FRAZIO (8)
 	print ('Bisogna aspettare ',lapse,' secondi ')	
 	#print('%f %f' % (moonaz, moonalt))     <--RIPRISTINALO
 	print("Azimut tra ",lapse," secondi: ", moon2az)
