@@ -100,6 +100,7 @@ def CONFIG():
         config.set('Observer','long',long)
         config.write(conftime)
         conftime.close()
+
 #####################################################	MAIN	#####################################################	#######################################
 #create a INI file for configparsers
 if os.path.isfile('./conftime.ini')==True:
@@ -175,8 +176,8 @@ while 1<5:
 	FRAZIO (8)
 	print ('Bisogna aspettare ',lapse,' secondi ')	
 	#print('%f %f' % (moonaz, moonalt))     <--RIPRISTINALO
-	print("Azimut2: ", moon2az)
-	print("Azimut: ", moonaz)
+	print("Azimut tra ",lapse," secondi: ", moon2az)
+	print("Azimut attuale: ", moonaz)
 	sleep(lapse)
 
 GPIO.cleanup()
