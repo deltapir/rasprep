@@ -103,17 +103,17 @@ def CONFIG():
 
 #####################################################	MAIN	#####################################################	#######################################
 #create a INI file for configparsers
-if os.path.isfile('./conftime.ini')==True:
-	conftime = open("conftime.ini",'r+')
-	config.readfp(conftime)
-	if config.has_section('User')== True:
+if os.path.isfile('./conftime.ini')==True:			#cerca il file conftime.ini
+	conftime = open("conftime.ini",'r+')			#se lo trova lo apre
+	config.readfp(conftime)					#lo legge
+	if config.has_section('User')== True:			#se ha la sezione 'User': cioè se è scritto dentro
 		print("Benvenuto %s. La tua longitudine e latitudine sono: %s - %s" % (config.get('User','Name'), config.get('Observer','long'), config.get('Observer','lats')))
 		conftime.close()
-	else:
-		conftime.close()
-		CONFIG()
-else:
-	print("Sei sccemo")
+	else:							
+		conftime.close()				#se non è scritto dentro
+		CONFIG()		
+else:								#se non trova il file conftime.ini
+	print("Sei sccemo")					
 	CONFIG()
 		
 print (time.strftime("Oggi e il %d/%m/%Y e sono le %H:%M:%S")) 
