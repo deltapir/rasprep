@@ -106,11 +106,11 @@ def CONFIG():
 if os.path.isfile('./conftime.ini')==True:			#cerca il file conftime.ini
 	conftime = open("conftime.ini",'r+')			#se lo trova lo apre
 	config.readfp(conftime)					#lo legge
-	if config.has_section('User')== True:			#se ha la sezione 'User': cioè se è scritto dentro
+	if config.has_section('User')== True:			#se ha la sezione 'User' scritto dentro
 		print("Benvenuto %s. La tua longitudine e latitudine sono: %s - %s" % (config.get('User','Name'), config.get('Observer','long'), config.get('Observer','lats')))
 		conftime.close()
 	else:							
-		conftime.close()				#se non è scritto dentro
+		conftime.close()				#se non e' scritto dentro
 		CONFIG()		
 else:								#se non trova il file conftime.ini
 	print("Sei sccemo")					
@@ -152,10 +152,11 @@ moonalt, moonaz, moon2alt, moon2az = COMPUTE (lon, lat, moon, moon2, reflex, ref
 #sleep(wait)
 while 1<5:
 	i=0
-	a=ephem.degrees(0.098175) #tutti gli angoli in pyephem sono in radianti
-	print (a)
+	#a=ephem.degrees(0.098175) 					#tutti gli angoli in pyephem sono in radianti
+	a=ephem.degrees(0.001)		#usato solo per provare con tempi minori
+	#print (a)
 	moonalt, moonaz, moon2alt, moon2az = COMPUTE(lon, lat, moon, moon2, reflex, reflexvirt)
-	while (abs(ephem.separation(POS(moon), POS(moon2))) <= a ):  	#dico che la differenza di azimut delle due lune deve essere inferiore 
+	while (abs(ephem.degrees(moonalt)-ephem.degrees(moon2alt)) <= a ) and (abs(ephem.degrees(moonaz)-ephem.degrees(moon2az))<=a): #dico che la differenza di azimut e altitudine delle due lune deve essere inferiore
 		moonalt, moonaz, moon2alt, moon2az = COMPUTE (lon, lat, moon, moon2, reflex, reflexvirt)		#al passo del motore
 		#print(abs(moon2az-moonaz))    	
 		#print("Azimut2: ", moon2az)   	#stampa l'azimut di moon2
@@ -169,16 +170,17 @@ while 1<5:
 		moon2.compute(reflexvirt)				#computa la posizione di moon2 con la nuova ora
 		moon2az=str(moon2.az)		#restituisce l'azimut in angolo di moon2
 		moon2alt=str(moon2.alt)
-		print ('Tra ',i,' secondi la luna sta in AZ:',moon2az,'e ALT:',moon2alt,' ', end='\r')
+		print('Tra ',i,' secondi la luna sta in AZ:',moon2az,'e ALT:',moon2alt, end='\r')
 		#raw_input ("INVIO")
 		#moon2.compute(reflexvirt)
 		lapse = i			#aggiorno il time di lapse tra uno scatto e l'altro
 		i+=1
 	#FRAZIO (8)
+	print('\n')
 	print ('Bisogna aspettare ',lapse,' secondi ')	
 	#print('%f %f' % (moonaz, moonalt))     <--RIPRISTINALO
-	print("Azimut tra ",lapse," secondi: ", moon2az)
-	print("Azimut attuale: ", moonaz)
+	print("Posizione moon2 tra ",lapse," secondi: ", moon2az,"e ",moon2alt)
+	print("Posizione moon attuale: ", moonaz,"e ",moonalt)
 	sleep(lapse)
 
 GPIO.cleanup()
