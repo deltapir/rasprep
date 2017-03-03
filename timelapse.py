@@ -18,14 +18,23 @@ for pin in ControlPin:
 	GPIO.setup(pin,GPIO.OUT)
 	GPIO.output(pin,0)
 
-seq = [	[1,0,0,0], #matrice halfstep
-	[1,1,0,0],
-	[0,1,0,0],
-	[0,1,1,0],
-	[0,0,1,0],
-	[0,0,1,1],
-	[0,0,0,1],
-	[1,0,0,1] ]
+#seq = [	[1,0,0,0], #matrice halfstep
+#	[1,1,0,0],
+#	[0,1,0,0],
+#	[0,1,1,0],
+#	[0,0,1,0],
+#	[0,0,1,1],
+#	[0,0,0,1],
+#	[1,0,0,1] ]
+
+seq = [ [0,0,0,1], #matrice halfstep
+        [0,0,1,1],
+        [0,0,1,0],
+        [0,1,1,0],
+        [0,1,0,0],
+        [1,1,0,0],
+        [1,0,0,0],
+        [1,0,0,1] ]
 
 GPIO.setwarnings(False)
 GPIO.cleanup()
@@ -49,7 +58,8 @@ def FRAZIO (res):
 
 def FIRST(moon2az): #ruota il motore alla posizione iniziale
 	print ("INIZIO PROGRAMMA FIRST")
-        pinint=int((moon2az//5.625)) 		#numero di rotazioni complete del rotore (5.625 gradi)
+        moon2az=((float(moon2az)*180)//3.1415)
+	pinint=int((moon2az//5.625)) 		#numero di rotazioni complete del rotore (5.625 gradi)
 	pinint8=pinint*8			
 	pinres=int(((moon2az//0.7)-pinint)/64) 	#numero di pin rimanenti
 	print ("GIRI COMPLETI ", pinint8)
@@ -148,15 +158,15 @@ moon=ephem.Moon()
 moon2=ephem.Moon()
 
 moonalt, moonaz, moon2alt, moon2az = COMPUTE (lon, lat, moon, moon2, reflex, reflexvirt)
-#FIRST (moon2az)
+FIRST (moon2az)
 #sleep(wait)
 while 1<5:
 	i=0
-	#a=ephem.degrees(0.098175) 					#tutti gli angoli in pyephem sono in radianti
-	a=ephem.degrees(0.001)		#usato solo per provare con tempi minori
+	a=ephem.degrees(0.098175) 					#tutti gli angoli in pyephem sono in radianti
+	#a=ephem.degrees(0.01)		#usato solo per provare con tempi minori
 	#print (a)
 	moonalt, moonaz, moon2alt, moon2az = COMPUTE(lon, lat, moon, moon2, reflex, reflexvirt)
-	while (abs(ephem.degrees(moonalt)-ephem.degrees(moon2alt)) <= a ) and (abs(ephem.degrees(moonaz)-ephem.degrees(moon2az))<=a): #dico che la differenza di azimut e altitudine delle due lune deve essere inferiore
+	while (abs((ephem.degrees(moonalt))-(ephem.degrees(moon2alt))) <= a ) and (abs((ephem.degrees(moonaz))-(ephem.degrees(moon2az)))<=a): #dico che la differenza di azimut e altitudine delle due lune deve essere inferiore
 		moonalt, moonaz, moon2alt, moon2az = COMPUTE (lon, lat, moon, moon2, reflex, reflexvirt)		#al passo del motore
 		#print(abs(moon2az-moonaz))    	
 		#print("Azimut2: ", moon2az)   	#stampa l'azimut di moon2
@@ -175,7 +185,7 @@ while 1<5:
 		#moon2.compute(reflexvirt)
 		lapse = i			#aggiorno il time di lapse tra uno scatto e l'altro
 		i+=1
-	#FRAZIO (8)
+	FRAZIO (8)
 	print('\n')
 	print ('Bisogna aspettare ',lapse,' secondi ')	
 	#print('%f %f' % (moonaz, moonalt))     <--RIPRISTINALO
