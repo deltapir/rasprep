@@ -52,7 +52,7 @@ def FIRST(moon2az): #ruota il motore alla posizione iniziale
         moon2az=((float(moon2az)*180)//3.1415)
 	pinint=int((moon2az//5.625)) 		#numero di rotazioni complete del rotore (5.625 gradi)
 	pinint8=pinint*8			
-	pinres=int(((moon2az//0.7)-pinint)/64) 	#numero di pin rimanenti
+	pinres=int(((moon2az//0.7)-pinint)/63.68395) 	#numero di pin rimanenti
 	print ("GIRI COMPLETI ", pinint8)
         print ("GIRI FRAZ ", pinres)
 	#raw_input ("Premi INVIO per eseguire il Ciclo INTERO!")
