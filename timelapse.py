@@ -31,7 +31,7 @@ GPIO.setwarnings(False)
 GPIO.cleanup()
 
 def INTERO (int):	#rotazione INTERA
-	for i in range(int):         #rotazione ciclo intero  a 5.625
+	for i in range(int):         #rotazione ciclo intero  a 5.625 dell'albero interno e di 5.625/64 dell'albero esterno
 		FRAZIO (8)
 
 def FRAZIO (res):
@@ -40,7 +40,7 @@ def FRAZIO (res):
 	for pin in ControlPin:
 		GPIO.setup(pin,GPIO.OUT)
 		GPIO.output(pin,0)
-	for halfstep in range(res):  #rotazione ciclo frazionato a 0.7
+	for halfstep in range(res):  #rotazione ciclo frazionato a 0.7 dell'albero interno e di 0.7/64 dell'albero esterno
                 for pin in range(4):
                         GPIO.output(ControlPin[pin], seq[halfstep][pin])
                         #print (ControlPin[pin], seq[halfstep][pin])
@@ -153,7 +153,7 @@ FIRST (moon2az)
 #sleep(wait)
 while 1<5:
 	i=0
-	a=ephem.degrees(0.098175) 	#tutti gli angoli in pyephem sono in radianti
+	a=ephem.degrees(0.0015339) 	#tutti gli angoli in pyephem sono in radianti
 	#a=ephem.degrees(0.01)		#usato solo per provare con tempi minori
 	#print (a)
 	moonalt, moonaz, moon2alt, moon2az = COMPUTE(lon, lat, moon, moon2, reflex, reflexvirt)
