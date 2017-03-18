@@ -18,7 +18,7 @@ for pin in ControlPin:
 	GPIO.setup(pin,GPIO.OUT)
 	GPIO.output(pin,0)
 
-seq = [ [0,0,0,1], #matrice halfstep
+seq = [ [0,0,0,1], #matrice halfstep per la rotazione oraria
         [0,0,1,1],
         [0,0,1,0],
         [0,1,1,0],
@@ -30,8 +30,8 @@ seq = [ [0,0,0,1], #matrice halfstep
 GPIO.setwarnings(False)
 GPIO.cleanup()
 
-def INTERO (int):	#rotazione INTERA
-	for i in range(int):         #rotazione ciclo intero  a 5.625 dell'albero interno e di 5.625/64 dell'albero esterno
+def INTERO (int):			#rotazione di 45 gradi albero interno
+	for i in range(int):         
 		FRAZIO (8)
 
 def FRAZIO (res):
@@ -40,7 +40,7 @@ def FRAZIO (res):
 	for pin in ControlPin:
 		GPIO.setup(pin,GPIO.OUT)
 		GPIO.output(pin,0)
-	for halfstep in range(res):  #rotazione ciclo frazionato a 0.7 dell'albero interno e di 0.7/64 dell'albero esterno
+	for halfstep in range(res):  #rotazione ciclo frazionato a 5.625 per ciclo dell'albero interno e di 5.625/64 dell'albero esterno
                 for pin in range(4):
                         GPIO.output(ControlPin[pin], seq[halfstep][pin])
                         #print (ControlPin[pin], seq[halfstep][pin])
@@ -50,9 +50,9 @@ def FRAZIO (res):
 def FIRST(moon2az): #ruota il motore alla posizione iniziale
 	print ("INIZIO PROGRAMMA FIRST")
         moon2az=((float(moon2az)*180)//3.1415)	#da radianti in gradi
-	pinint=int(((moon2az*63.68395)//(5.625*64))) 		#numero di rotazioni complete del rotore (5.625 gradi)
-	pinint8=pinint*8			
-	pinres=int(((moon2az//0.7)-pinint)/63.68395) 	#numero di pin rimanenti
+	pinint=int(((moon2az*64)//(5.625*8))) 		#numero di step da 5.625*8 dell'albero interno per effettuare la rotazione dell'albero esterno
+	pinint8=pinint			
+	pinres=int(((moon2az*64)//(5.625))-pinint*8) #numero di pin rimanenti
 	print ("GIRI COMPLETI ", pinint8)
         print ("GIRI FRAZ ", pinres)
 	#raw_input ("Premi INVIO per eseguire il Ciclo INTERO!")
