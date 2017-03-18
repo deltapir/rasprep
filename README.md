@@ -1,11 +1,6 @@
 #timelapse.py
 
-Per usare **timelapse.py** basta `sudo python timelapse.py`
-
-**Stat'v bbuon, waju!**
-
-
-#Futuri implementi in timelapse.py
+*Futuri implementi in timelapse.py*
 
 - [x]  ~~Aggiungere la letture da un file `conftimelapse.txt` delle latitudini dell'observer;~~
 - [x]  Aggiungere una riga che si sovrascrive quando il programma calcola il 
